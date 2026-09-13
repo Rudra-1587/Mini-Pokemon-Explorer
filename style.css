@@ -151,3 +151,90 @@ input:checked + .slider:before {
     pointer-events: none;
 }
 
+/*  */
+
+.sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; 
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+}
+
+/* --- Hero / Description Section --- */
+.hero-section {
+    padding: 35px 20px;
+    text-align: center;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease;
+}
+
+.hero-content { max-width: 800px; margin: 0 auto; }
+
+.hero-greeting {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.hero-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.85;
+    margin-bottom: 40px;
+}
+
+/* --- Search Bar --- */
+.search-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input {
+    flex: 1;
+    padding: 14px 24px;
+    font-size: 1rem;
+    border: 2px solid var(--header-border);
+    border-radius: 50px; 
+    background-color: var(--header-bg);
+    color: var(--text-color);
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.search-input:focus { border-color: #ff0000; }
+.search-input::placeholder { color: var(--text-color); opacity: 0.5; }
+
+.search-btn {
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #ff0000; 
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.search-btn:hover { background-color: #cc0000; }
+.search-btn:active { transform: scale(0.97); }
+
+/* --- Responsive Design for Hero --- */
+@media (max-width: 600px) {
+    .hero-section { padding: 50px 20px; }
+    .hero-title { font-size: 2.2rem; }
+    .hero-description { font-size: 1rem; }
+    .search-container { flex-direction: column; }
+    .search-btn { width: 100%; }
+}

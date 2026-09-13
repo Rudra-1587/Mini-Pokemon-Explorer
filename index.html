@@ -44,11 +44,24 @@
         </nav>
     </header>
 
-    <!-- Main Content Placeholder -->
-    <main style="padding: 40px; text-align: center;">
-        <h1>Welcome to the Home Page</h1>
-        <p>Toggle the switch in the top right corner to change the theme!</p>
-    </main>
+        <!-- HERO / SEARCH COMPONENT -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-greeting">Hello! 👋</h1>
+            <h2 class="hero-title">Welcome to the Ultimate PokéDex</h2>
+            <p class="hero-description">
+                Discover, explore, and learn everything about your favorite Pokémon. 
+                explore all the stats, types, abilities, and evolution chains you need to become a Pokémon Master.
+            </p>
+            
+            <!-- Search Bar -->
+            <form class="search-container" id="search-form">
+                <label for="pokemon-search" class="sr-only">Search Pokémon</label>
+                <input type="text" id="pokemon-search" class="search-input" placeholder="Search for a Pokémon (e.g., Pikachu)...">
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+        </div>
+    </section>
 
     <!-- JavaScript for Theme Toggle -->
     <script>
