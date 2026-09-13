@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokéball Header</title>
+   
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <!-- Logo -->
+        <a href="#" class="logo">
+            <svg class="pokeball-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Top Red Half -->
+                <path d="M2,50 A48,48 0 0,1 98,50 Z" fill="#ff0000" stroke="#000" stroke-width="4"/>
+                <!-- Bottom White Half -->
+                <path d="M2,50 A48,48 0 0,0 98,50 Z" fill="#ffffff" stroke="#000" stroke-width="4"/>
+                <!-- Middle Line -->
+                <line x1="2" y1="50" x2="98" y2="50" stroke="#000" stroke-width="4"/>
+                <!-- Outer Center Circle -->
+                <circle cx="50" cy="50" r="16" fill="#ffffff" stroke="#000" stroke-width="4"/>
+                <!-- Inner Center Button -->
+                <circle cx="50" cy="50" r="8" fill="#ffffff" stroke="#000" stroke-width="3"/>
+            </svg>
+            <span>PokéDex</span>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <a href="#" class="nav-link">Home</a>
+            
+            <!-- Light/Dark Mode Switch -->
+            <label class="theme-switch" title="Toggle Dark Mode">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider">
+                    <span class="switch-icons">
+                        <span>☀️</span>
+                        <span>🌙</span>
+                    </span>
+                </span>
+            </label>
+        </nav>
+    </header>
+
+    <!-- Main Content Placeholder -->
+    <main style="padding: 40px; text-align: center;">
+        <h1>Welcome to the Home Page</h1>
+        <p>Toggle the switch in the top right corner to change the theme!</p>
+    </main>
+
+    <!-- JavaScript for Theme Toggle -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Check for saved user preference, otherwise check system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            body.classList.add('dark-mode');
+            themeToggle.checked = true;
+        }
+
+        // Listen for toggle changes
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+</body>
+</html>
