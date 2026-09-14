@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokéball Header</title>
    
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./Style/style.css">
+
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
 </head>
 <body>
 
@@ -27,11 +36,118 @@
             <span>PokéDex</span>
         </a>
 
-        <!-- Navigation -->
+        <!-- Navigation -->   
         <nav class="main-nav">
-            <a href="#" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Home</a>
+    
+            <!-- Desktop Navigation (visible on screens > 768px) -->
+            <div class="desktop-nav">
+                <!-- Generation Dropdown -->
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" id="gen-toggle-desktop">
+                        Generation
+                        <span class="dropdown-arrow">▼</span>
+                    </button>
+                    <div class="nav-dropdown-menu" id="gen-menu-desktop">
+                        <button class="dropdown-item" data-generation="1">Generation I</button>
+                        <button class="dropdown-item" data-generation="2">Generation II</button>
+                        <button class="dropdown-item" data-generation="3">Generation III</button>
+                        <button class="dropdown-item" data-generation="4">Generation IV</button>
+                        <button class="dropdown-item" data-generation="5">Generation V</button>
+                        <button class="dropdown-item" data-generation="6">Generation VI</button>
+                        <button class="dropdown-item" data-generation="7">Generation VII</button>
+                        <button class="dropdown-item" data-generation="8">Generation VIII</button>
+                        <button class="dropdown-item" data-generation="9">Generation IX</button>
+                    </div>
+                </div>
+                
+                <!-- Filter Dropdown -->
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" id="filter-toggle-desktop">
+                        Types
+                        <span class="dropdown-arrow">▼</span>
+                    </button>
+                    <div class="nav-dropdown-menu" id="filter-menu-desktop">
+                        <button class="dropdown-item" data-type="normal">Normal</button>
+                        <button class="dropdown-item" data-type="fire">Fire</button>
+                        <button class="dropdown-item" data-type="water">Water</button>
+                        <button class="dropdown-item" data-type="grass">Grass</button>
+                        <button class="dropdown-item" data-type="electric">Electric</button>
+                        <button class="dropdown-item" data-type="ice">Ice</button>
+                        <button class="dropdown-item" data-type="fighting">Fighting</button>
+                        <button class="dropdown-item" data-type="poison">Poison</button>
+                        <button class="dropdown-item" data-type="ground">Ground</button>
+                        <button class="dropdown-item" data-type="flying">Flying</button>
+                        <button class="dropdown-item" data-type="psychic">Psychic</button>
+                        <button class="dropdown-item" data-type="bug">Bug</button>
+                        <button class="dropdown-item" data-type="rock">Rock</button>
+                        <button class="dropdown-item" data-type="ghost">Ghost</button>
+                        <button class="dropdown-item" data-type="dragon">Dragon</button>
+                        <button class="dropdown-item" data-type="dark">Dark</button>
+                        <button class="dropdown-item" data-type="steel">Steel</button>
+                        <button class="dropdown-item" data-type="fairy">Fairy</button>
+                    </div>
+                </div>
+            </div>
             
-            <!-- Light/Dark Mode Switch -->
+            <!-- Mobile Hamburger Menu (visible on screens <= 768px) -->
+            <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Mobile Dropdown Menu -->
+            <div class="dropdown-menu" id="dropdown-menu">
+                <!-- Mobile Generation Section -->
+                <div class="dropdown-section">
+                    <button class="dropdown-section-toggle" id="gen-toggle-mobile">
+                        <span>Generation</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </button>
+                    <div class="dropdown-items" id="gen-menu-mobile">
+                        <button class="dropdown-item" data-generation="1">Generation I</button>
+                        <button class="dropdown-item" data-generation="2">Generation II</button>
+                        <button class="dropdown-item" data-generation="3">Generation III</button>
+                        <button class="dropdown-item" data-generation="4">Generation IV</button>
+                        <button class="dropdown-item" data-generation="5">Generation V</button>
+                        <button class="dropdown-item" data-generation="6">Generation VI</button>
+                        <button class="dropdown-item" data-generation="7">Generation VII</button>
+                        <button class="dropdown-item" data-generation="8">Generation VIII</button>
+                        <button class="dropdown-item" data-generation="9">Generation IX</button>
+                    </div>
+                </div>
+                
+                <!-- Mobile Filter Section -->
+                <div class="dropdown-section">
+                    <button class="dropdown-section-toggle" id="filter-toggle-mobile">
+                        <span>Filter by Type</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </button>
+                    <div class="dropdown-items" id="filter-menu-mobile">
+                        <button class="dropdown-item" data-type="normal">Normal</button>
+                        <button class="dropdown-item" data-type="fire">Fire</button>
+                        <button class="dropdown-item" data-type="water">Water</button>
+                        <button class="dropdown-item" data-type="grass">Grass</button>
+                        <button class="dropdown-item" data-type="electric">Electric</button>
+                        <button class="dropdown-item" data-type="ice">Ice</button>
+                        <button class="dropdown-item" data-type="fighting">Fighting</button>
+                        <button class="dropdown-item" data-type="poison">Poison</button>
+                        <button class="dropdown-item" data-type="ground">Ground</button>
+                        <button class="dropdown-item" data-type="flying">Flying</button>
+                        <button class="dropdown-item" data-type="psychic">Psychic</button>
+                        <button class="dropdown-item" data-type="bug">Bug</button>
+                        <button class="dropdown-item" data-type="rock">Rock</button>
+                        <button class="dropdown-item" data-type="ghost">Ghost</button>
+                        <button class="dropdown-item" data-type="dragon">Dragon</button>
+                        <button class="dropdown-item" data-type="dark">Dark</button>
+                        <button class="dropdown-item" data-type="steel">Steel</button>
+                        <button class="dropdown-item" data-type="fairy">Fairy</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Theme Toggle -->
             <label class="theme-switch" title="Toggle Dark Mode">
                 <input type="checkbox" id="theme-toggle">
                 <span class="slider">
@@ -63,30 +179,10 @@
         </div>
     </section>
 
-    <!-- JavaScript for Theme Toggle -->
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
+    
 
-        // Check for saved user preference, otherwise check system preference
-        const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-            body.classList.add('dark-mode');
-            themeToggle.checked = true;
-        }
-
-        // Listen for toggle changes
-        themeToggle.addEventListener('change', () => {
-            if (themeToggle.checked) {
-                body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                body.classList.remove('dark-mode');
-                localStorage.setItem('theme', 'light');
-            }
-        });
+    <script src="./HomePage JS/main.js">
+        
     </script>
 </body>
 </html>
