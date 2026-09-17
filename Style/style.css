@@ -372,7 +372,7 @@ input:checked + .slider:before {
 /* The Grid Container */
 .cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 24px;
     max-width: 1100px; /* Caps at 4 cards per row */
     margin: 0 auto;
@@ -448,3 +448,4 @@ input:checked + .slider:before {
     .card-image { width: 90px; height: 90px; }
     .card-name { font-size: 1rem; }
 }
+

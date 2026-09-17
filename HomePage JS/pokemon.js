@@ -65,7 +65,6 @@ async function renderPokemonCards(pageNumber){
 }
 renderPokemonCards(1);
 
-
 searchBtn.addEventListener('click', async(e) => {
     e.preventDefault();
 
@@ -78,7 +77,22 @@ searchBtn.addEventListener('click', async(e) => {
         console.log(data);
 
         searchInput.value = "";
-    }
+
+        const id = data.id;
+        const pokemon = data.name;
+        const image = data.sprites.front_default;
+
+        const pokemonGrid = document.getElementById("pokemon-grid").innerHTML = `
+          <div class="pokemon-card">
+            <div class="card-image">
+                <img src="${image}" alt="${pokemon}">
+            </div>
+            <h3 class="card-name">${pokemon}</h3>
+            <p class="card-id">#${id}</p>
+        </div>
+
+        `;
+    } 
 });
 
 // Also allow pressing Enter key to search
@@ -89,4 +103,3 @@ searchInput.addEventListener('keypress', (e) => {
         searchInput.value = "";
     }
 });
-
