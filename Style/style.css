@@ -7,6 +7,7 @@
     --switch-bg: #cccccc;
     --switch-knob: #ffffff;
     --nav-hover: #e9ecef;
+    --border-hover:#0075ea;
 }
 
 body.dark-mode {
@@ -17,6 +18,7 @@ body.dark-mode {
     --switch-bg: #444444;
     --switch-knob: #eabe0e; /* Yellow knob for dark mode */
     --nav-hover: #2c2c2c;
+    --border-hover:#ff0000;
 }
 
 /* --- Base Styles --- */
@@ -161,6 +163,7 @@ input:checked + .slider:before {
 /* --- Hero / Description Section --- */
 .hero-section {
     padding: 35px 20px;
+    padding-bottom: 15px;
     text-align: center;
     background-color: var(--bg-color);
     transition: background-color 0.3s ease;
@@ -212,7 +215,7 @@ input:checked + .slider:before {
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.search-input:focus { border-color: #ff0000; }
+.search-input:focus { border-color: var(--border-hover);; }
 .search-input::placeholder { color: var(--text-color); opacity: 0.5; }
 
 .search-btn {
@@ -326,7 +329,7 @@ input:checked + .slider:before {
 }
 
 .dropdown-item.active {
-    background-color: #ff0000;
+    background-color: var(--border-hover);
     color: #ffffff;
     font-weight: 600;
 } 
@@ -363,7 +366,7 @@ input:checked + .slider:before {
 
 /* --- Cards Grid Section --- */
 .cards-section {
-    padding: 40px 20px 80px;
+    padding: 34px 20px 80px;
     background-color: var(--bg-color);
     transition: background-color 0.3s ease;
     width: 100%;
@@ -396,7 +399,7 @@ input:checked + .slider:before {
 .pokemon-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    border-color: #ff0000;
+    border-color: var(--border-hover);
 }
 
 .card-image {
@@ -449,3 +452,49 @@ input:checked + .slider:before {
     .card-name { font-size: 1rem; }
 }
 
+.pagination-div{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+.page-btn,
+.arrow-btn{
+    padding: 0px 9px;
+    margin-right: 15px;
+    border: solid 2px var(--bg-color);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 35px;
+    cursor: pointer;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease-out, border-color 0.2s ease;
+}
+
+.dots{
+    margin-right: 15px;
+}
+
+.page-btn{
+    padding:3px 10px ;
+    font-size: 22px;
+}
+
+.page-btn:hover{
+    border-color:var(--border-hover);;
+    transform: translateY(-4px);
+}
+
+.page-btn.active{
+    border-color: purple;
+    
+}
+
+.error-container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 35px;
+    color: #ff0000;
+}
