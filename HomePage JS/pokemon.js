@@ -1,9 +1,7 @@
-const searchBtn = document.getElementById('search-btn');
-const searchInput = document.getElementById('pokemon-search');
-const totalPokemonPages = 52;
+import { startPokemonGenerationLimit, endPokemonGenerationLimit, totalPokemonPages, changeTotalPages } from "./config.js";
 
 // fetch data from PokeAPI
-async function pokemonFetch(value){
+export async function pokemonFetch(value){
   try{
     let response;
     if(typeof value === "string"){
@@ -24,18 +22,19 @@ async function pokemonFetch(value){
 }
 
 // create pokemon cards 
-async function renderPokemonCards(pageNumber){
+export async function renderPokemonCards(startPokemonGenerationLimit, endPokemonGenerationLimit, currentPage){
+
+  const loader = document.getElementById('loader');
 
   const pokemonGrid = document.getElementById("pokemon-grid");
   let pokemonCards = "";
 
-  let offset = (pageNumber-1)*20;
-  if(pageNumber===1){
-    offset = 0;
-  }
-  console.log(offset);
+  const offset = startPokemonGenerationLimit+((currentPage-1)*20); 
 
   try{
+
+    loader.style.display = "flex";
+    pokemonGrid.style.display = "none";
     
     const data = await pokemonFetch(offset);
     console.log(data);
@@ -48,9 +47,7 @@ async function renderPokemonCards(pageNumber){
       const pokemon = data.name;
       const image = data.sprites.front_default;
 
-
-      // 1025 value is total pokemon appeared in pokemon series it does not includes
-      if(id <= 1025){
+      if(id >= startPokemonGenerationLimit && id <= endPokemonGenerationLimit){
         pokemonCards += `
         <div class="pokemon-card">
             <div class="card-image">
@@ -62,7 +59,9 @@ async function renderPokemonCards(pageNumber){
       
       `;
       }
-
+      else{
+        break;
+      }
     };
     
     pokemonGrid.innerHTML=pokemonCards;
@@ -70,76 +69,47 @@ async function renderPokemonCards(pageNumber){
   }catch(error){
     console.error(error);
   }
+  finally{
+    loader.style.display = "none";
+    pokemonGrid.style.display = "grid";
+  }
 
 }
 
-// specific pokemon search logic
-searchBtn.addEventListener('click', async(e) => {
-  e.preventDefault();
-
-  const query = searchInput.value.toLowerCase();
-  const pokemonGrid = document.getElementById('pokemon-grid');
-  const errorContainer = document.getElementById('error-message');
-
-  try{
-    if(query !== "") {
-      console.log(`Searching for: ${query}`);
-
-      const data = await pokemonFetch(query);
-
-      if(!data){  
-        errorContainer.innerHTML = `
-          <h3>Data of pokemon ${query} is not found</h3>
-        `;
-
-        setTimeout(() => {
-          errorContainer.innerHTML = "";
-          searchInput.value = "";
-        },3000);
-        
-      }else{
-        searchInput.value = "";
-
-        const id = data.id;
-        const pokemon = data.name;
-        const image = data.sprites.front_default;
-        
-        if(Number(id) <= 1025){
-          pokemonGrid.innerHTML = `
-          <div class="pokemon-card">
-            <div class="card-image">
-                <img src="${image}" alt="${pokemon}">
-            </div>
-            <h3 class="card-name">${pokemon}</h3>
-            <p class="card-id">#${id}</p>
-          </div>
-
-          `;
-        }
-        
-      }
-      
-    }
-  }catch(error){
-    console.error(error);
-  }
-});
-
-// Also allow pressing Enter key to search
-searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        searchBtn.click();
-        searchInput.value = "";
-    }
-});
-
 // loads pagination according to page number
-function paginationLoads(page){
+export function paginationLoads(page){
   let pageNumber = Number(page);
 
+  const totalPages = Math.ceil( ( endPokemonGenerationLimit - startPokemonGenerationLimit ) /20 );
+
+  changeTotalPages(totalPages)
+  console.log(totalPokemonPages);
+
   let pagesHtml = "";
-  if(pageNumber < 4 ){
+  if(totalPokemonPages <= 6){
+     let leftArrowHtml=`
+    
+        <span>
+            <button class="arrow-btn" id="prev-arrow-btn">&larr;</button>
+        </span>
+    `;
+
+    let buttonGenerationHtml=``;
+    for(let i = 1; i <= totalPokemonPages; i++){
+      buttonGenerationHtml+=`
+        <button class="page-btn ${pageNumber===i?'active':''}">${i}</button>
+      `;
+    }
+
+    let rightArrowHtnl=`
+        <span>
+            <button class="arrow-btn" id="next-arrow-btn">&rarr;</button>
+        </span>
+    `;
+
+    pagesHtml=leftArrowHtml+buttonGenerationHtml+rightArrowHtnl;
+  }
+  else if(pageNumber < 4 ){
     pagesHtml=`
     
         <span>
@@ -162,7 +132,7 @@ function paginationLoads(page){
     `;
   }
 
-  else if(pageNumber > totalPokemonPages-3 && pageNumber <= 52){
+  else if(pageNumber > totalPokemonPages-3 && pageNumber <= totalPokemonPages){
     pagesHtml = `
       <span>
             <button class="arrow-btn" id="prev-arrow-btn">&larr;</button>
@@ -210,7 +180,6 @@ function paginationLoads(page){
   const pagination = document.getElementById('pagination-div-js');
   pagination.innerHTML=pagesHtml;
 
-
 // after generating pagination HTML make them interactive
   const pageBtn = document.querySelectorAll('.page-btn');
 
@@ -220,9 +189,12 @@ function paginationLoads(page){
         
         pageBtn.forEach((b)=>{b.classList.remove('active')});
         e.target.classList.add('active');
+      
+        let currentPage = e.target.innerHTML;
 
-        renderPokemonCards(e.target.innerHTML);
-        paginationLoads(e.target.innerHTML);
+        paginationLoads(currentPage);
+        renderPokemonCards(startPokemonGenerationLimit, endPokemonGenerationLimit, currentPage);
+        
       }
     })
   });
@@ -244,7 +216,7 @@ function paginationLoads(page){
           });
 
           paginationLoads(pageNumber);
-          renderPokemonCards(pageNumber);
+          renderPokemonCards(startPokemonGenerationLimit, endPokemonGenerationLimit, pageNumber);
 
         }  
       }else{
@@ -259,7 +231,8 @@ function paginationLoads(page){
           });
 
           paginationLoads(pageNumber);
-          renderPokemonCards(pageNumber);
+          renderPokemonCards(startPokemonGenerationLimit, endPokemonGenerationLimit, pageNumber);
+          
         }
         
       } 
@@ -269,7 +242,7 @@ function paginationLoads(page){
   })
 }
 
-// loading first page when website is open, also when reload fisrt page will appear again
+// loading first page when website is open, also when reload the browser, fisrt page will appear again
 let page = 1;
 paginationLoads(page);
-renderPokemonCards(page);
+renderPokemonCards(startPokemonGenerationLimit, endPokemonGenerationLimit, page);

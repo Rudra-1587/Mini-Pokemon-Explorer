@@ -50,6 +50,7 @@
                     </button>
                     
                     <div class="nav-dropdown-menu" id="gen-menu-desktop">
+                        <button class="dropdown-item active" data-generation="0">All generations</button>
                         <button class="dropdown-item" data-generation="1">Generation I</button>
                         <button class="dropdown-item" data-generation="2">Generation II</button>
                         <button class="dropdown-item" data-generation="3">Generation III</button>
@@ -69,6 +70,7 @@
                         <span class="dropdown-arrow">▼</span>
                     </button>
                     <div class="nav-dropdown-menu" id="filter-menu-desktop">
+                        <button class="dropdown-item" data-type="all">All</button>
                         <button class="dropdown-item" data-type="normal">Normal</button>
                         <button class="dropdown-item" data-type="fire">Fire</button>
                         <button class="dropdown-item" data-type="water">Water</button>
@@ -127,13 +129,20 @@
     <!-- POKEMON CARDS GRID -->
     <section class="cards-section">
         <div class="error-container" id="error-message"> </div>
-        <div class="cards-container" id="pokemon-grid"> </div>
+        <div class="loader-area">
+            <div class="loader" id="loader"></div>
+        </div>
+
+        
+
+        <div class="cards-container" id="pokemon-grid"></div>
     </section>
 
     <div class="pagination-div" id="pagination-div-js">
     </div>
 
-    <script src="./HomePage JS/main.js"></script>
-    <script src="./HomePage JS/pokemon.js"></script>
+    <script src="./HomePage JS/main.js" type="module"></script>
+    <script src="./HomePage JS/pokemon.js" type="module"></script>
+    <script src="./HomePage JS/config.js" type="module"></script>
 </body>
 </html>
