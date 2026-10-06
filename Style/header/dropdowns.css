@@ -1,0 +1,96 @@
+@import "../variables.css";
+
+/* --- Desktop Navigation --- */
+.desktop-nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-toggle {
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+}
+
+.nav-dropdown-toggle:hover {
+    background-color: var(--nav-hover);
+}
+
+.dropdown-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-dropdown-toggle.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 30px);
+    left: 0;
+    background-color: var(--header-bg);
+    border: 1px solid var(--header-border);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    min-width: 200px;
+    max-width: 250px; 
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.nav-dropdown-menu.active {
+    max-height: 400px;
+    opacity: 1;
+    transform: translateY(0);
+    overflow-y: auto;
+}
+
+.dropdown-item {
+    background: transparent;
+    border: none;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    font-family: inherit;
+    white-space: nowrap; 
+}
+
+.dropdown-item:hover {
+    background-color: var(--nav-hover);
+    transform: translateX(4px);
+}
+
+.dropdown-item.active {
+    background-color: var(--border-hover);
+    color: #ffffff;
+    font-weight: 600;
+} 
+
+.generation-short{
+    display: none;
+}

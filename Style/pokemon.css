@@ -1,0 +1,72 @@
+@import "./variables.css";
+
+/* --- Cards Grid Section --- */
+.cards-section {
+    padding: 34px 20px 80px;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+/* The Grid Container */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1100px; /* Caps at 4 cards per row */
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+/* Individual Card Styles */
+.pokemon-card {
+    background-color: var(--header-bg);
+    border: 2px solid var(--header-border);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-color: var(--border-hover);
+}
+
+.card-image {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.card-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 4px;
+    text-transform: capitalize;
+}
+
+.card-id {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.6;
+    font-weight: 500;
+}

@@ -1,0 +1,57 @@
+/* --- Responsive Design for Hero --- */
+@media (max-width: 600px) {
+    .hero-section { padding: 50px 20px; }
+    .hero-title { font-size: 2.2rem; }
+    .hero-description { font-size: 1rem; }
+    .search-container { flex-direction: column; }
+    .search-btn { width: 100%; }
+}
+
+/* --- Responsive Design for dropdowns --- */
+@media (max-width: 600px) {
+
+    .generation-full{
+        display: none;
+    }
+
+    .generation-short{
+        display: inline;
+    }
+
+    .nav-dropdown-menu{
+        right: 0;
+        left: auto;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .dropdown-item {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Responsive Adjustments pokemon cards */
+@media (max-width: 900px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 18px;
+    }
+}
+
+@media (max-width: 500px) {
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .card-image { width: 90px; height: 90px; }
+    .card-name { font-size: 1rem; }
+}
+
+/* loader */
+@keyframes spin{
+    to{
+        transform: rotate(360deg);
+    }
+}

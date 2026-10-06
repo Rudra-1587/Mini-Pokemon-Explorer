@@ -1,0 +1,22 @@
+/* --- CSS Variables for Theming --- */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --header-bg: #f8f9fa;
+    --header-border: #e0e0e0;
+    --switch-bg: #cccccc;
+    --switch-knob: #ffffff;
+    --nav-hover: #e9ecef;
+    --border-hover:#0075ea;
+}
+
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #f8f9fa;
+    --header-bg: #1e1e1e;
+    --header-border: #333333;
+    --switch-bg: #444444;
+    --switch-knob: #eabe0e; /* Yellow knob for dark mode */
+    --nav-hover: #2c2c2c;
+    --border-hover:#ff0000;
+}
