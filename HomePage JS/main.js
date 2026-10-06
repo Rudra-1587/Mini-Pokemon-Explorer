@@ -1,22 +1,16 @@
-import { startPokemonGenerationLimit, endPokemonGenerationLimit, changeLimit } from "./config.js";
-import { pokemonFetch, paginationLoads, renderPokemonCards } from "./pokemon.js";
+import { startPokemonGenerationLimit, endPokemonGenerationLimit, changeLimit, pokemonGenLimitArray } from "./config.js";
+import { renderPokemonCards } from "./pokemon.js";
+import { paginationLoads } from "./pagination.js";
+import { pokemonFetchByName } from "./PokemonData.js";
+
+// loading first page when website is open, also when reload the browser, fisrt page will appear again
+let page = 1;
+paginationLoads(page);
+renderPokemonCards(startPokemonGenerationLimit, endPokemonGenerationLimit, page);
+
 
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
-
-
-const pokemonGenLimitArray = [
-  {name:"all", start : 0, end : 1025 },
-  {name:"gen1", start : 0, end : 151},
-  {name:"gen2", start : 151, end : 251 },
-  {name:"gen3", start : 251, end : 386 },
-  {name:"gen4", start : 386, end : 493 },
-  {name:"gen5", start : 493, end : 649 },
-  {name:"gen6", start : 649, end : 721,},
-  {name:"gen7", start : 721, end : 809 },
-  {name:"gen8", start : 809, end : 905 },
-  {name:"gen9", start : 905, end : 1025 }, ];
-
 
 if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
     body.classList.add('dark-mode');
@@ -111,17 +105,21 @@ const searchBtn = document.getElementById('search-btn');
 const searchInput = document.getElementById('pokemon-search');
 
 searchBtn.addEventListener('click', async(e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const query = searchInput.value.toLowerCase();
-  const pokemonGrid = document.getElementById('pokemon-grid');
-  const errorContainer = document.getElementById('error-message');
+    const query = searchInput.value.toLowerCase();
+    const pokemonGrid = document.getElementById('pokemon-grid');
+    const errorContainer = document.getElementById('error-message');
+    const loader = document.getElementById('loader');
 
-  try{
+    try{
+    
+    loader.style.display = "flex";
+    pokemonGrid.style.display = "none";
     if(query !== "") {
       console.log(`Searching for: ${query}`);
 
-      const data = await pokemonFetch(query);
+      const data = await pokemonFetchByName(query);
 
       if(!data){  
         errorContainer.innerHTML = `
@@ -158,6 +156,10 @@ searchBtn.addEventListener('click', async(e) => {
     }
   }catch(error){
     console.error(error);
+  }
+  finally{
+    loader.style.display = "none";
+    pokemonGrid.style.display = "grid";
   }
 });
 
